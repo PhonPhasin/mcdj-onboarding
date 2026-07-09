@@ -7,14 +7,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #FAFAFA; color: #111111; font-weight: 300; }
+        /* สไตล์หลักแบบ Minimalist */
+        body { 
+            font-family: 'Prompt', sans-serif; 
+            background-color: #FAFAFA;
+            color: #111111;
+            font-weight: 300;
+        }
+        
+        /* สไตล์สำหรับ Task ที่ทำเสร็จแล้ว */
         .checked-task { text-decoration: line-through; color: #9CA3AF; } 
+        
+        /* สไตล์สำหรับกล่องที่ทำผ่านแล้ว (สีเขียวแบบสว่าง) */
         .step-completed { border-color: #22C55E !important; background-color: #F0FDF4; }
         .step-completed-text { color: #15803D !important; }
+        
+        /* ซ่อนหน้าต่างๆ ตอนเริ่มต้น */
         .page-view { display: none; }
         .active-page { display: block; }
+        
+        /* Animation สำหรับ Popup */
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
@@ -23,7 +39,7 @@
 </head>
 <body class="pb-12">
 
-    <!-- Navbar -->
+    <!-- Navbar สไตล์ Clean -->
     <div class="bg-white border-b border-gray-200 p-4 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-opacity-90">
         <div class="flex justify-between items-center max-w-4xl mx-auto">
             <h1 class="text-base font-normal tracking-wide text-black">ระบบจัดการใบอนุญาตทีมงาน</h1>
@@ -31,7 +47,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- ระบบ Popup แจ้งเตือน -->
     <div id="custom-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm hidden">
         <div class="bg-white border border-gray-100 p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-w-sm w-full mx-4 text-center fade-in">
             <div id="modal-icon" class="text-5xl mb-4">⚠️</div>
@@ -41,9 +57,9 @@
         </div>
     </div>
 
-    <!-- Login / Register Page -->
+    <!-- หน้า Login / Register -->
     <div id="login-page" class="page-view active-page p-4 max-w-md mx-auto mt-12">
-        <!-- Login Section -->
+        <!-- ส่วนเข้าสู่ระบบ -->
         <div id="login-section" class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center fade-in">
             <h2 class="text-3xl font-light tracking-tight text-black mb-3">เข้าสู่ระบบ</h2>
             <p class="text-sm text-gray-500 font-light mb-8">กรุณากรอกอีเมลเพื่อติดตามความคืบหน้า</p>
@@ -55,7 +71,7 @@
                 <button type="button" onclick="forgotPassword()" class="text-xs text-gray-400 hover:text-black transition">ลืมรหัสผ่าน?</button>
             </div>
             
-            <button id="btn-login" class="w-full bg-[#FACC15] text-black py-3.5 rounded-xl font-medium hover:bg-[#EAB308] transition text-lg shadow-sm" onclick="login()">เข้าสู่ระบบ</button>
+            <button class="w-full bg-[#FACC15] text-black py-3.5 rounded-xl font-medium hover:bg-[#EAB308] transition text-lg shadow-sm" onclick="login()">เข้าสู่ระบบ</button>
             
             <div class="mt-8 pt-6 border-t border-gray-100">
                 <p class="text-sm text-gray-400 font-light">ยังไม่มีบัญชีผู้ใช้งาน?</p>
@@ -63,7 +79,7 @@
             </div>
         </div>
 
-        <!-- Register Section -->
+        <!-- ส่วนลงทะเบียน -->
         <div id="register-section" class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-left hidden fade-in">
             <h2 class="text-3xl font-light tracking-tight text-black mb-3 text-center">ลงทะเบียนใหม่</h2>
             <p class="text-sm text-gray-500 font-light mb-8 text-center">สร้างโปรไฟล์ในระบบ MCDJ WEALTH ADVISOR</p>
@@ -90,7 +106,7 @@
                     <input type="password" id="reg-confirm" placeholder="••••••••" class="w-full bg-[#F8F9FA] border border-gray-200 rounded-xl px-4 py-3 text-black font-light focus:outline-none focus:border-black transition">
                 </div>
                 
-                <button id="btn-register" class="w-full bg-black text-white py-3.5 rounded-xl font-medium hover:bg-gray-800 transition text-lg mt-4 shadow-md" onclick="register()">สมัครสมาชิก</button>
+                <button class="w-full bg-black text-white py-3.5 rounded-xl font-medium hover:bg-gray-800 transition text-lg mt-4 shadow-md" onclick="register()">สมัครสมาชิก</button>
             </div>
             
             <div class="mt-8 pt-6 border-t border-gray-100 text-center">
@@ -131,6 +147,7 @@
                 <span id="desc-menu2" class="text-sm text-gray-500 font-light ml-12">แผนการทำงานและเรียนรู้ 15 วันแรก</span>
             </button>
 
+            <!-- เมนูอื่นๆ ปิดไว้ก่อนตามเดิม -->
             <button onclick="showModal('ระบบนี้กำลังอยู่ในระหว่างการพัฒนา ทีมงานกำลังเร่งจัดทำครับ', 'info')" class="flex flex-col text-left bg-gray-50 p-6 rounded-2xl border border-gray-100 opacity-80 hover:opacity-100 transition-opacity">
                 <div class="flex items-center mb-2">
                     <span class="text-2xl mr-4 grayscale opacity-60">📈</span>
@@ -295,6 +312,10 @@
                     <div><label class="block text-sm mb-2 text-black">2. สำเนาทะเบียนบ้าน</label><input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-gray-100 file:text-black hover:file:bg-gray-200 transition cursor-pointer"/></div>
                     <div><label class="block text-sm mb-2 text-black">3. สำเนาหน้าบุ๊คแบงค์</label><input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-gray-100 file:text-black hover:file:bg-gray-200 transition cursor-pointer"/></div>
                     <div><label class="block text-sm mb-2 text-black">4. สกรีนช็อต ผลการลงทะเบียน OIC</label><input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-black file:text-white hover:file:bg-gray-800 transition cursor-pointer"/></div>
+                    
+                    <div class="pt-4 border-t border-gray-200"><label class="block text-sm mb-2 text-gray-400">5. ใบสำคัญเปลี่ยนชื่อ (ถ้ามี)</label><input type="file" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-gray-50 file:text-gray-500 hover:file:bg-gray-100 transition cursor-pointer"/></div>
+                    <div><label class="block text-sm mb-2 text-gray-400">6. สำเนาบัตรคู่สมรส (ถ้ามี)</label><input type="file" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-gray-50 file:text-gray-500 hover:file:bg-gray-100 transition cursor-pointer"/></div>
+                    <div><label class="block text-sm mb-2 text-gray-400">7. ใบจดทะเบียนสมรส (ถ้ามี)</label><input type="file" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-gray-50 file:text-gray-500 hover:file:bg-gray-100 transition cursor-pointer"/></div>
                 </div>
                 <div class="mt-6 flex justify-end border-t border-gray-200 pt-4">
                     <label class="flex items-center space-x-3 cursor-pointer group">
@@ -320,9 +341,14 @@
                 </div>
 
                 <p class="mb-4 text-sm">เข้าสู่ระบบ iAcademy เพื่อเรียนหลักสูตรบังคับ 2 หลักสูตร:</p>
+                <ul class="list-none pl-4 mb-6 text-black space-y-3 border-l px-2 border-gray-300 text-sm">
+                    <li><span class="font-medium">1. หลักสูตร 02E:</span> แนวทางปฏิบัติทางการตลาดออนไลน์</li>
+                    <li><span class="font-medium">2. หลักสูตร 0E1:</span> iPASS ก้าวแรกสู่สังเวียน (ออนไลน์)</li>
+                </ul>
                 
                 <button class="w-full bg-white text-black py-3 rounded-xl border border-gray-300 font-medium hover:bg-gray-50 transition mb-3 shadow-sm text-sm" onclick="openDynamicLink('step6_learn_manual', 'กำลังเปิดไฟล์ PDF: คู่มือการเข้าใช้งานเรียนออนไลน์')">คู่มือการเข้าใช้งานเรียนออนไลน์</button>
                 <button class="w-full bg-[#FACC15] text-black py-3 rounded-xl font-medium hover:bg-[#EAB308] transition mb-3 shadow-sm" onclick="openDynamicLink('step6_aia_learn_web', 'กำลังพาท่านไปที่: หน้าเว็บเรียนออนไลน์ AIA')">เข้าสู่ระบบเรียนออนไลน์ AIA</button>
+                <button class="w-full bg-white text-black py-3 rounded-xl border border-gray-300 font-medium hover:bg-gray-50 transition mb-6 shadow-sm text-sm" onclick="openDynamicLink('step6_troubleshoot', 'กำลังเปิดไฟล์ PDF: วิธีแก้ปัญหาเบื้องต้น')">วิธีแก้ปัญหาเบื้องต้น</button>
 
                 <div class="space-y-5 pt-4 border-t border-gray-200">
                     <div>
@@ -407,10 +433,12 @@
             <!-- Day 01 -->
             <div class="relative group">
                 <div id="badge-day1" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">01</div>
+                
                 <button onclick="toggleDay('day1')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day1" class="font-normal text-black text-lg transition-colors duration-300">DAY 1: การเตรียมตัวเข้าสู่ระบบ</h3>
                     <span id="icon-day1" class="text-3xl font-light text-gray-400 leading-none">-</span>
                 </button>
+                
                 <div id="content-day1" class="transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-3 shadow-sm">
                         <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">ระบบของ AIA</p>
@@ -421,6 +449,8 @@
                                 <input type="checkbox" id="cb-เริ่มระบบของตัวแทนใหม่" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เริ่มระบบของตัวแทนใหม่')">
                                 <div class="flex-1 task-content transition-opacity duration-300">
                                     <span class="text-sm text-black font-medium transition-colors">เริ่มระบบของตัวแทนใหม่</span>
+                                    <p class="text-xs text-gray-500 font-light mt-1.5 leading-relaxed">ตรวจสอบอีเมล — บริษัทจะส่งอีเมลแจ้งรหัสตัวแทนและรหัสผ่าน ส่ง Greeting Letter ไปยังอีเมลของคุณที่ลงทะเบียนไว้</p>
+                                    <p class="text-xs text-gray-500 font-light mt-1 leading-relaxed">Agent Website / iMO / AIA One : ใช้รหัสตัวแทน (User ID) และรหัสผ่านที่ได้รับจากอีเมลเพื่อเข้าสู่ระบบครั้งแรก</p>
                                 </div>
                             </label>
                         </div>
@@ -431,8 +461,14 @@
                                 <input type="checkbox" id="cb-เข้าใช้งานใน Line เพื่อเชื่อมต่อ iMo Smart" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เข้าใช้งานใน Line เพื่อเชื่อมต่อ iMo Smart')">
                                 <div class="flex-1 task-content transition-opacity duration-300">
                                     <span class="text-sm text-black font-medium transition-colors">เข้าใช้งานใน Line เพื่อเชื่อมต่อ iMo Smart</span>
+                                    <span class="inline-block bg-[#F8F9FA] text-gray-500 border border-gray-200 text-[10px] px-2 py-0.5 rounded-md ml-2 font-light">แนะนำ ทำในโทรศัพท์มือถือ</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_imo_manual', 'กำลังเปิด: คู่มือการลงทะเบียน iMo Smart')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการลงทะเบียน</button>
+                                <button onclick="openDynamicLink('day1_imo_link', 'พาท่านไปยัง: ลิงก์เข้าสู่การลงทะเบียน')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่การลงทะเบียน</button>
+                                <button onclick="openDynamicLink('day1_imo_use_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน iMo Smart')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการเข้าใช้งาน</button>
+                            </div>
                         </div>
 
                         <!-- 3. เว็บ AIA Agent -->
@@ -443,6 +479,10 @@
                                     <span class="text-sm text-black font-medium transition-colors">เข้าระบบเว็บ AIA Agent</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_agent_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน AIA Agent')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการเข้าใช้งาน</button>
+                                <button onclick="openDynamicLink('day1_agent_link', 'พาท่านไปยัง: ลิงก์เข้าสู่การลงทะเบียน AIA Agent')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่การลงทะเบียน</button>
+                            </div>
                         </div>
 
                         <!-- 4. AIA One -->
@@ -453,6 +493,12 @@
                                     <span class="text-sm text-black font-medium transition-colors">โหลดแอปพลิเคชัน AIA One</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_aiaone_iphone', 'ไปยัง App Store สำหรับ iPhone')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">วิธีการลง AIA ONE / iPhone</button>
+                                <button onclick="openDynamicLink('day1_aiaone_ipad', 'ไปยัง App Store สำหรับ iPad')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">วิธีการลง AIA ONE / iPad</button>
+                                <button onclick="openDynamicLink('day1_aiaone_android', 'ไปยัง Play Store สำหรับ Android')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">วิธีการลง AIA ONE / Android</button>
+                                <button onclick="openDynamicLink('day1_aiaone_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน AIA One')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition mt-1">คู่มือการเข้าใช้งาน</button>
+                            </div>
                         </div>
                     </div>
 
@@ -465,8 +511,13 @@
                                 <input type="checkbox" id="cb-1. เข้าระบบ MCDJTrackFlow" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '1. เข้าระบบ MCDJTrackFlow')">
                                 <div class="flex-1 task-content transition-opacity duration-300">
                                     <span class="text-sm text-black font-medium transition-colors">1. เข้าระบบ MCDJTrackFlow</span>
+                                    <p class="text-xs text-gray-500 font-light mt-1.5 leading-relaxed">เข้าระบบด้วยอีเมลที่ลงทะเบียนกับ AIA และรหัสผ่านคือ รหัสตัวแทน</p>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_mcdj_sys_link', 'พาท่านไปยัง: ลิงก์เข้าสู่ระบบ')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่ระบบ</button>
+                                <button onclick="openDynamicLink('day1_mcdj_sys_manual', 'กำลังเปิด: คู่มือติดตั้งลงเครื่อง')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">ลิงก์คู่มือติดตั้งลงเครื่อง</button>
+                            </div>
                         </div>
 
                         <!-- 2. ลงระบบคำนวนระยะเวลารอคอย -->
@@ -477,6 +528,10 @@
                                     <span class="text-sm text-black font-medium transition-colors">2. ลงระบบคำนวนระยะเวลารอคอย</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_mcdj_wait_link', 'พาท่านไปยัง: ลิงก์เข้าสู่ระบบ')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่ระบบ</button>
+                                <button onclick="openDynamicLink('day1_mcdj_wait_manual', 'กำลังเปิด: คู่มือติดตั้งลงเครื่อง')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">ลิงก์คู่มือติดตั้งลงเครื่อง</button>
+                            </div>
                         </div>
 
                         <!-- 3. ลงระบบคำนวนอายุลูกค้า และ ชดเชยรายได้ -->
@@ -487,6 +542,10 @@
                                     <span class="text-sm text-black font-medium transition-colors">3. ลงระบบคำนวนอายุลูกค้า และ ชดเชยรายได้</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_mcdj_age_link', 'พาท่านไปยัง: ลิงก์เข้าสู่ระบบ')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่ระบบ</button>
+                                <button onclick="openDynamicLink('day1_mcdj_age_manual', 'กำลังเปิด: คู่มือติดตั้งลงเครื่อง')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">ลิงก์คู่มือติดตั้งลงเครื่อง</button>
+                            </div>
                         </div>
 
                         <!-- 4. ลงทะเบียนระบบวางแผนการเงินและเก็บข้อมูลลูกค้า -->
@@ -497,6 +556,10 @@
                                     <span class="text-sm text-black font-medium transition-colors">4. ลงทะเบียนระบบวางแผนการเงินและเก็บข้อมูลลูกค้า</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_mcdj_plan_link', 'พาท่านไปยัง: ลิงก์เข้าสู่ระบบ')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่ระบบ</button>
+                                <button onclick="openDynamicLink('day1_mcdj_plan_manual', 'กำลังเปิด: คู่มือติดตั้งลงเครื่อง')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">ลิงก์คู่มือติดตั้งลงเครื่อง</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -512,6 +575,23 @@
                 </button>
 
                 <div id="content-day2" class="hidden transition-all duration-300">
+                    
+                    <!-- กล่องข้อความให้กำลังใจ & คำเตือน -->
+                    <div class="bg-[#F8F9FA] border border-gray-200 rounded-2xl p-5 mb-5">
+                        <p class="text-sm text-gray-600 font-light leading-relaxed mb-4">การเรียนออนไลน์อาจจะเยอะ แต่ขอเป็นกำลังใจให้และแบ่งเวลาชีวิตดีๆนะครับ เพื่อตัวเราและคนรอบตัวเรามีคุณภาพชีวิตที่ดีขึ้น เรามาลงทุนความรู้ด้วยเวลาด้วยกันครับ สู้ๆ นะ ✌️</p>
+                        <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-xl p-3 flex items-start space-x-3">
+                            <span class="text-[#B45309] mt-0.5">⚠️</span>
+                            <p class="text-[#92400E] text-xs font-medium leading-relaxed">คำเตือน: ไม่แนะนำให้เรียนผ่านโทรศัพท์มือถือ เพื่อการแสดงผลที่สมบูรณ์</p>
+                        </div>
+                    </div>
+
+                    <!-- ปุ่มเข้าเรียน / คู่มือ -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <button onclick="openDynamicLink('day2_learn_sys_link', 'พาท่านไปยัง: ระบบการเรียน iAcademy')" class="text-xs bg-black text-white px-4 py-2.5 rounded-xl hover:bg-gray-800 transition shadow-sm">ลิงก์การเข้าสู่ระบบการเรียน</button>
+                        <button onclick="openDynamicLink('day2_learn_reg_manual', 'กำลังเปิด: คู่มือการลงทะเบียนเรียน')" class="text-xs border border-gray-200 px-4 py-2.5 rounded-xl text-gray-600 hover:border-black hover:text-black transition">คู่มือการลงทะเบียนเรียน</button>
+                        <button onclick="openDynamicLink('day2_learn_troubleshoot', 'กำลังเปิด: วิธีแก้ปัญหาระบบเบื้องต้น')" class="text-xs border border-gray-200 px-4 py-2.5 rounded-xl text-gray-600 hover:border-black hover:text-black transition">วิธีแก้ปัญหาระบบเบื้องต้น</button>
+                    </div>
+
                     <!-- หลักสูตรบังคับ -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
                         <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">หมวดหลักสูตรบังคับ</p>
@@ -568,6 +648,9 @@
                                     <span class="text-sm text-black font-medium transition-colors">1. มาดูเทคนิคสร้างตัวตนบนโลกออนไลน์</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day2_vdo_online_mkt', 'เปิด VDO: การทำตลาดออนไลน์')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm flex items-center">🎥 ดู VDO สั้นๆ กับการทำตลาดออนไลน์</button>
+                            </div>
                         </div>
 
                         <div class="complex-task transition-all duration-300">
@@ -577,6 +660,12 @@
                                     <span class="text-sm text-black font-medium transition-colors">2. ผลประโยชน์ และโบนัสพิเศษ</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-col gap-2">
+                                <button onclick="openDynamicLink('day2_vdo_bonus_sum', 'เปิด VDO: สรุปโบนัสพิเศษตัวแทนใหม่')" class="text-left text-[11px] border border-gray-200 px-3 py-2 rounded-lg text-gray-600 hover:border-black hover:text-black transition flex items-center"><span class="mr-3 text-lg leading-none">▶</span> 1. สรุปโบนัสพิเศษตัวแทนใหม่</button>
+                                <button onclick="openDynamicLink('day2_vdo_bonus_clear', 'เปิด VDO: เคลียร์เรื่องโบนัสตัวแทนใหม่')" class="text-left text-[11px] border border-gray-200 px-3 py-2 rounded-lg text-gray-600 hover:border-black hover:text-black transition flex items-center"><span class="mr-3 text-lg leading-none">▶</span> 2. เคลียร์เรื่องโบนัสตัวแทนใหม่</button>
+                                <button onclick="openDynamicLink('day2_vdo_bonus_compare', 'เปิด VDO: ผลตอบแทนตัวแทนที่มากขึ้นในระยะยาว')" class="text-left text-[11px] border border-gray-200 px-3 py-2 rounded-lg text-gray-600 hover:border-black hover:text-black transition flex items-center"><span class="mr-3 text-lg leading-none">▶</span> 3. เคลียร์เรื่องผลตอบแทนตัวแทนที่มากขึ้นในระยะยาว (Regular Agent กับ Top Agent)</button>
+                                <button onclick="openDynamicLink('day2_vdo_career_path', 'เปิด VDO: เส้นทางการเติบโตของตัวแทน AIA')" class="text-left text-[11px] border border-gray-200 px-3 py-2 rounded-lg text-gray-600 hover:border-black hover:text-black transition flex items-center"><span class="mr-3 text-lg leading-none">▶</span> 4. เส้นทางการเติบโตของตัวแทน AIA (Career Path)</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -587,12 +676,13 @@
                 <div id="badge-day3" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">4-5</div>
                 
                 <button onclick="toggleDay('day3')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
-                    <h3 id="title-day3" class="font-normal text-black text-lg transition-colors duration-300">DAY 4 - 5: เรียน Product และ ความรู้พื้นฐาน</h3>
+                    <h3 id="title-day3" class="font-normal text-black text-lg transition-colors duration-300">DAY 4 - 5: เรียน Product และ ความรู้พื้นฐาน และเปิดสิทธิ์การขาย</h3>
                     <span id="icon-day3" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
 
                 <div id="content-day3" class="hidden transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+                        
                         <!-- 1. คลิปสั้นๆ -->
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group mb-3">
@@ -601,7 +691,11 @@
                                     <span class="text-sm text-black font-medium transition-colors">1. คลิปสั้นๆ อธิบายโครงสร้างแบบประกัน</span>
                                 </div>
                             </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day4_vdo_product_intro', 'เปิด VDO: คลิป สั้น 2 นาที')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm flex items-center">🎥 ลิงก์คลิป สั้น 2 นาที</button>
+                            </div>
                         </div>
+
                         <!-- 2. 10E -->
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group">
@@ -611,15 +705,18 @@
                                 </div>
                             </label>
                         </div>
+
                         <!-- 3. 5E9 -->
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-3. 5E9 กฎหมายป้องกันและปราบปรามการฟอกเงินขั้นพื้นฐาน" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '3. 5E9 กฎหมายป้องกันและปราบปรามการฟอกเงินขั้นพื้นฐาน')">
                                 <div class="flex-1 task-content transition-opacity duration-300">
                                     <span class="text-sm text-black font-medium transition-colors">3. 5E9 กฎหมายป้องกันและปราบปรามการฟอกเงินขั้นพื้นฐาน</span>
+                                    <p class="text-xs text-gray-500 font-light mt-1.5 leading-relaxed">(ANTI-MONEY LAUNDERING)</p>
                                 </div>
                             </label>
                         </div>
+
                         <!-- 4. 5EX -->
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group">
@@ -629,6 +726,7 @@
                                 </div>
                             </label>
                         </div>
+
                         <!-- 5. MULTI-PAY CI -->
                         <div class="complex-task transition-all duration-300">
                             <label class="flex items-start space-x-3 cursor-pointer group">
@@ -638,6 +736,7 @@
                                 </div>
                             </label>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -645,11 +744,15 @@
             <!-- Day 6-10 -->
             <div class="relative group">
                 <div id="badge-day4" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">6-10</div>
+                
                 <button onclick="toggleDay('day4')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day4" class="font-normal text-black text-lg transition-colors duration-300">DAY 6 - 10: เรียน Product ประกันชีวิตและสุขภาพ</h3>
                     <span id="icon-day4" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
+
                 <div id="content-day4" class="hidden transition-all duration-300">
+                    
+                    <!-- แบบประกันหลัก -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
                         <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">แบบประกันหลัก</p>
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
@@ -693,18 +796,132 @@
                             </label>
                         </div>
                     </div>
+
+                    <!-- สัญญาเพิ่มเติม กลุ่มยกเว้นการชำระเบี้ย -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">สัญญาเพิ่มเติม กลุ่มยกเว้นการชำระเบี้ย</p>
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-2E5 | E-LEARNING : AIA WP (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2E5 | E-LEARNING : AIA WP (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2E5 | E-LEARNING : AIA WP (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-2E6 | E-LEARNING : AIA PB-PBCI (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2E6 | E-LEARNING : AIA PB-PBCI (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2E6 | E-LEARNING : AIA PB-PBCI (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- สัญญาเพิ่มเติม กลุ่มอุบัติเหตุ -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">สัญญาเพิ่มเติม กลุ่มอุบัติเหตุ</p>
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-2E1 | E-LEARNING : AIA ACCIDENT (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2E1 | E-LEARNING : AIA ACCIDENT (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2E1 | E-LEARNING : AIA ACCIDENT (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- สัญญาเพิ่มเติม ความคุ้มครองโรคร้ายแรง -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">สัญญาเพิ่มเติม ความคุ้มครองโรคร้ายแรง</p>
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-2E4 | E-LEARNING : AIA AHC (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2E4 | E-LEARNING : AIA AHC (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2E4 | E-LEARNING : AIA AHC (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-2E3 | E-LEARNING : AIA CIP (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2E3 | E-LEARNING : AIA CIP (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2E3 | E-LEARNING : AIA CIP (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-5E8 | E-LEARNING : MULTI-PAY CI (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '5E8 | E-LEARNING : MULTI-PAY CI (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">5E8 | E-LEARNING : MULTI-PAY CI (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- สัญญาเพิ่มเติม ความคุ้มครองค่ารักษาพยาบาลและชดเชยรายได้ -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 mb-4 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">สัญญาเพิ่มเติม ความคุ้มครองค่ารักษาพยาบาลและชดเชยรายได้</p>
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-1E2 | E-LEARNING : AIA HB EXTRA (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '1E2 | E-LEARNING : AIA HB EXTRA (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">1E2 | E-LEARNING : AIA HB EXTRA (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-3ED | E-LEARNING : AIA HEALTH HAPPY (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '3ED | E-LEARNING : AIA HEALTH HAPPY (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">3ED | E-LEARNING : AIA HEALTH HAPPY (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- ความรู้ทั่วไป -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">ความรู้ทั่วไป</p>
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-5EF | E-LEARNING : ทบทวนความรู้เกี่ยวกับผลิตภัณฑ์ AIA MULTI-PAY CI (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '5EF | E-LEARNING : ทบทวนความรู้เกี่ยวกับผลิตภัณฑ์ AIA MULTI-PAY CI (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">5EF | E-LEARNING : ทบทวนความรู้เกี่ยวกับผลิตภัณฑ์ AIA MULTI-PAY CI (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-5EJ | E-LEARNING : HEALTH CLAIM REFRESHMENT : รอบรู้เรื่องเคลมประกันสุขภาพ (CPD 1)" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '5EJ | E-LEARNING : HEALTH CLAIM REFRESHMENT : รอบรู้เรื่องเคลมประกันสุขภาพ (CPD 1)')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">5EJ | E-LEARNING : HEALTH CLAIM REFRESHMENT : รอบรู้เรื่องเคลมประกันสุขภาพ (CPD 1)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <!-- Day 11 -->
             <div class="relative group">
                 <div id="badge-day5" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">11</div>
+                
                 <button onclick="toggleDay('day5')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day5" class="font-normal text-black text-lg transition-colors duration-300">DAY 11: สรุปความรู้ Product + ออกแบบแผน + เครื่องมือวางแผน</h3>
                     <span id="icon-day5" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
+
                 <div id="content-day5" class="hidden transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                        
+                        <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-xl p-4 mb-5 flex items-start space-x-3">
+                            <span class="text-[#B45309] mt-0.5 text-lg">💡</span>
+                            <p class="text-[#92400E] text-sm font-light leading-relaxed"><span class="font-medium">เป็นการเรียน Onsite:</span> แนะนำให้เรียนระบบออนไลน์ก่อนหน้าให้ครบ เพื่อความรวดเร็วและเข้าใจง่ายขึ้นในการเรียนรู้</p>
+                        </div>
+
                         <div class="complex-task transition-all duration-300">
                             <label class="flex items-start space-x-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-เข้าร่วมการเรียน Onsite สรุปความรู้ ออกแบบแผน และการใช้เครื่องมือวางแผน" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เข้าร่วมการเรียน Onsite สรุปความรู้ ออกแบบแผน และการใช้เครื่องมือวางแผน')">
@@ -713,6 +930,7 @@
                                 </div>
                             </label>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -720,12 +938,15 @@
             <!-- Day 12 -->
             <div class="relative group">
                 <div id="badge-day6" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">12</div>
+                
                 <button onclick="toggleDay('day6')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day6" class="font-normal text-black text-lg transition-colors duration-300">DAY 12: ฝึกการนำเสนอและพูดคุยกับลูกค้า และ AI ROLE PLAY</h3>
                     <span id="icon-day6" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
+
                 <div id="content-day6" class="hidden transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                        
                         <div class="complex-task transition-all duration-300 mb-6 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-ฝึกการนำเสนอและพูดคุยกับลูกค้า และทดสอบด้วยระบบ AI ROLE PLAY" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'ฝึกการนำเสนอและพูดคุยกับลูกค้า และทดสอบด้วยระบบ AI ROLE PLAY')">
@@ -734,6 +955,45 @@
                                 </div>
                             </label>
                         </div>
+
+                        <p class="text-[10px] text-gray-400 font-medium mb-4 uppercase tracking-widest">VDO สั้นเพิ่มเติม (เทคนิคการตอบข้อโต้แย้ง)</p>
+                        
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group mb-3">
+                                <input type="checkbox" id="cb-1. #เทคนิคปิดการขาย เมื่อลูกค้าบอกยังไม่สนใจรับมือแบบนี้" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '1. #เทคนิคปิดการขาย เมื่อลูกค้าบอกยังไม่สนใจรับมือแบบนี้')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">1. #เทคนิคปิดการขาย เมื่อลูกค้าบอกยังไม่สนใจรับมือแบบนี้</span>
+                                </div>
+                            </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day12_vdo_obj_not_interest', 'เปิด VDO: เมื่อลูกค้าบอกยังไม่สนใจ')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm flex items-center"><span class="mr-2 text-sm leading-none">▶</span> ดู VDO</button>
+                            </div>
+                        </div>
+
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group mb-3">
+                                <input type="checkbox" id="cb-2. #เทคนิคปิดการขาย เมื่อลูกค้าบอกว่าขอเทียบดูก่อน" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '2. #เทคนิคปิดการขาย เมื่อลูกค้าบอกว่าขอเทียบดูก่อน')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">2. #เทคนิคปิดการขาย เมื่อลูกค้าบอกว่าขอเทียบดูก่อน</span>
+                                </div>
+                            </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day12_vdo_obj_compare', 'เปิด VDO: เมื่อลูกค้าบอกขอเทียบดูก่อน')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm flex items-center"><span class="mr-2 text-sm leading-none">▶</span> ดู VDO</button>
+                            </div>
+                        </div>
+
+                        <div class="complex-task transition-all duration-300">
+                            <label class="flex items-start space-x-3 cursor-pointer group mb-3">
+                                <input type="checkbox" id="cb-3. #เทคนิคปิดการขาย เมื่อลูกค้าบอกขอถามแฟนก่อน" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '3. #เทคนิคปิดการขาย เมื่อลูกค้าบอกขอถามแฟนก่อน')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">3. #เทคนิคปิดการขาย เมื่อลูกค้าบอกขอถามแฟนก่อน</span>
+                                </div>
+                            </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day12_vdo_obj_ask_partner', 'เปิด VDO: เมื่อลูกค้าบอกขอถามแฟนก่อน')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm flex items-center"><span class="mr-2 text-sm leading-none">▶</span> ดู VDO</button>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -741,12 +1001,15 @@
             <!-- Day 13 -->
             <div class="relative group">
                 <div id="badge-day7" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">13</div>
+                
                 <button onclick="toggleDay('day7')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day7" class="font-normal text-black text-lg transition-colors duration-300">DAY 13: สร้างตัวตนออนไลน์ FB IG และ TiKTok</h3>
                     <span id="icon-day7" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
+
                 <div id="content-day7" class="hidden transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                        
                         <div class="complex-task transition-all duration-300">
                             <label class="flex items-start space-x-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-สร้างตัวตนออนไลน์ FB IG และ TiKTok เพื่อเปิดตลาดทั้งคนรู้จักและไม่รู้จัก" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'สร้างตัวตนออนไลน์ FB IG และ TiKTok เพื่อเปิดตลาดทั้งคนรู้จักและไม่รู้จัก')">
@@ -755,6 +1018,7 @@
                                 </div>
                             </label>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -762,12 +1026,23 @@
             <!-- Day 14-15 -->
             <div class="relative group">
                 <div id="badge-day8" class="absolute w-8 h-8 bg-white border border-gray-200 rounded-full -left-12 flex items-center justify-center font-medium text-black text-[10px] shadow-sm z-10 transition-colors duration-300">14-15</div>
+                
                 <button onclick="toggleDay('day8')" class="w-full text-left flex justify-between items-center mb-4 focus:outline-none hover:opacity-60 transition-opacity bg-transparent">
                     <h3 id="title-day8" class="font-normal text-black text-lg transition-colors duration-300">DAY 14 - 15: ฝึกพูดและทำแผน 5 ราย</h3>
                     <span id="icon-day8" class="text-3xl font-light text-gray-400 leading-none">+</span>
                 </button>
+
                 <div id="content-day8" class="hidden transition-all duration-300">
                     <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                        
+                        <div class="bg-[#F0FDF4] border border-[#22C55E] rounded-xl p-4 mb-5 flex items-start space-x-3 shadow-sm">
+                            <span class="text-[#15803D] mt-0.5 text-lg">🌟</span>
+                            <p class="text-[#15803D] text-sm font-light leading-relaxed">
+                                <span class="font-medium">สุดยอดมากครับ คุณทำได้ถึงขั้นนี้!</span><br>
+                                เรามาทำประโยชน์เพื่อคนรอบตัวและสังคมที่เราอยู่ ให้เขามีความเข้าใจและวางแผนได้ดีขึ้นครับ สู้ๆ นะครับ!
+                            </p>
+                        </div>
+
                         <div class="complex-task transition-all duration-300">
                             <label class="flex items-start space-x-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-ฝึกพูดและทำแผน 5 ราย เพื่อวิเคราะห์การทำงาน" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'ฝึกพูดและทำแผน 5 ราย เพื่อวิเคราะห์การทำงาน')">
@@ -776,11 +1051,14 @@
                                 </div>
                             </label>
                         </div>
+                        
                     </div>
                 </div>
             </div>
+
         </div>
 
+        <!-- ป้ายประกาศความสำเร็จ จบหลักสูตร -->
         <div id="completion-banner" class="mt-12 mb-8 border border-dashed border-gray-300 bg-gray-50 opacity-70 rounded-2xl p-8 text-center transition-all duration-700 transform">
             <div id="completion-icon" class="text-gray-400 text-5xl mb-4 transition-all duration-700">🏁</div>
             <h3 id="completion-title" class="text-xl font-medium text-gray-400 mb-3 transition-colors duration-700">ภารกิจ 15 วันแรก</h3>
@@ -791,75 +1069,183 @@
     </div>
 
     <script>
-        // --- URL ระบบของ Google Apps Script ---
+        // --- ใส่ URL ของคุณตรงนี้เรียบร้อยแล้ว ---
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMIVZLvmeaTUpPeutahBxpfor0_4QygX2qMJhLY4EPW3Xf5N3WCtPDFo82XDqpbyez/exec';
+
         window.appLinks = {};
 
-        // โหลดข้อมูล
+        // --- โหลดข้อมูลตอนเปิดเว็บ ---
         window.onload = function() {
-            // เช็คว่ามี Login ค้างไว้ไหม (ถ้าไม่มีก็โชว์หน้า Login)
+            // เช็คว่ามีข้อมูลผู้ใช้ในระบบหรือยัง
             const userEmail = localStorage.getItem('userEmail');
-            if (userEmail) {
+            if(userEmail) {
                 showPage('dashboard-page');
-                fetchUserProgress(userEmail);
-            } else {
-                showPage('login-page');
+                fetchUserProgress(userEmail); // สั่งดึงประวัติการติ๊กถูก
             }
 
             fetch(SCRIPT_URL + '?action=getData', { method: 'GET', redirect: 'follow' })
-                .then(response => response.json())
-                .then(data => {
-                    const faSelect = document.getElementById('fa-selector');
-                    faSelect.innerHTML = '<option value="" data-url="">-- เลือกผู้แนะนำ (FA) --</option>';
-                    if (data.faList) {
-                        data.faList.forEach(fa => {
-                            const opt = document.createElement('option');
-                            opt.value = `${fa.name},${fa.code}`;
-                            opt.setAttribute('data-url', fa.url);
-                            opt.textContent = `คุณ${fa.name} (${fa.code})`;
-                            faSelect.appendChild(opt);
-                        });
-                    }
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        
+                        const faSelect = document.getElementById('fa-selector');
+                        faSelect.innerHTML = '<option value="" data-url="">-- เลือกผู้แนะนำ (FA) --</option>';
+                        if (data.faList && data.faList.length > 0) {
+                            data.faList.forEach(fa => {
+                                const opt = document.createElement('option');
+                                opt.value = `${fa.name},${fa.code}`;
+                                opt.setAttribute('data-url', fa.url);
+                                opt.textContent = `คุณ${fa.name} (${fa.code})`;
+                                faSelect.appendChild(opt);
+                            });
+                        }
 
-                    const examSelect = document.getElementById('exam-round');
-                    examSelect.innerHTML = '<option value="">-- เลือกรอบสอบ --</option>';
-                    if (data.examRounds) {
-                        data.examRounds.forEach(round => {
-                            const opt = document.createElement('option');
-                            opt.value = round;
-                            opt.textContent = round;
-                            examSelect.appendChild(opt);
-                        });
+                        const examSelect = document.getElementById('exam-round');
+                        examSelect.innerHTML = '<option value="">-- เลือกรอบสอบ --</option>';
+                        if (data.examRounds && data.examRounds.length > 0) {
+                            data.examRounds.forEach(round => {
+                                const opt = document.createElement('option');
+                                opt.value = round;
+                                opt.textContent = round;
+                                examSelect.appendChild(opt);
+                            });
+                        }
+                        
+                        if (data.links) {
+                            window.appLinks = data.links;
+                        }
+                    } catch (e) {
+                        console.warn("ไม่สามารถดึงข้อมูล JSON ได้", e);
                     }
-                    if (data.links) window.appLinks = data.links;
                 })
-                .catch(err => console.error("Error:", err));
+                .catch(err => console.error("Error loading data:", err));
         };
 
-        // ฟังก์ชันระบบ Login จริง
+        // --- ฟังก์ชันดึงประวัติการติ๊กถูกจาก Google Sheets ---
+        function fetchUserProgress(email) {
+            const params = new URLSearchParams({
+                action: 'getUserProgress',
+                email: email
+            });
+
+            fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success" && data.completedTasks) {
+                        // วนลูปรายชื่อ Task ที่ทำไปแล้ว และติ๊กถูกให้
+                        data.completedTasks.forEach(taskName => {
+                            // เช็คสำหรับเมนู 1 (step1 - step8)
+                            for (let i = 1; i <= 8; i++) {
+                                const box = document.getElementById('box-step' + i);
+                                if (box) {
+                                    const titleSpan = box.querySelector('button span:first-child');
+                                    if (titleSpan && titleSpan.innerText.trim() === taskName) {
+                                        const checkbox = document.getElementById('cb-step' + i);
+                                        if (checkbox && !checkbox.checked) {
+                                            checkbox.checked = true;
+                                            toggleCheck(checkbox, 'step' + i, true); // true = ไม่ต้องส่งค่ากลับไปบันทึกซ้ำ
+                                        }
+                                    }
+                                }
+                            }
+
+                            // เช็คสำหรับเมนู 2 (แผนงาน 15 วัน) - อิงจาก id ที่ตั้งไว้
+                            const planCheckbox = document.getElementById('cb-' + taskName);
+                            if (planCheckbox && !planCheckbox.checked) {
+                                planCheckbox.checked = true;
+                                toggleComplexTask(planCheckbox, taskName, true); // true = ไม่ต้องส่งค่ากลับไปบันทึกซ้ำ
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error("Error fetching progress:", error));
+        }
+
+        // --- ฟังก์ชันหลักสำหรับส่งข้อมูลไป Google Sheets ---
+        function sendDataToSheet(actionType, details = "") {
+            const userEmail = localStorage.getItem('userEmail') || '';
+            const userName = localStorage.getItem('userName') || '';
+            const userPhone = localStorage.getItem('userPhone') || '';
+            const userFA = localStorage.getItem('userFA') || '';
+
+            const params = new URLSearchParams({
+                actionType: actionType,
+                email: userEmail,
+                name: userName,
+                phone: userPhone,
+                faCode: userFA,
+                details: details
+            });
+
+            fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
+                .then(() => console.log('ส่งข้อมูลสำเร็จ: ' + actionType))
+                .catch(error => console.error('Error logging:', error));
+        }
+
+        // --- ระบบเปิดลิงก์แบบดึงจาก Google Sheets (Dynamic Links) ---
+        function openDynamicLink(linkKey, fallbackMsg) {
+            const url = window.appLinks[linkKey];
+            if (url && url.trim() !== "") {
+                // บันทึกการกดปุ่มเข้าไปใน Tracking ด้วย
+                sendDataToSheet('เปิดลิงก์', fallbackMsg || linkKey);
+                window.open(url, '_blank'); 
+            } else {
+                showModal('แอดมินกำลังเตรียมลิงก์สำหรับส่วนนี้ครับ<br><br>(' + fallbackMsg + ')', 'info');
+            }
+        }
+
+        // --- ระบบเปลี่ยนหน้าต่าง (Routing) ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleAuth(type) {
+            if (type === 'register') {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('register-section').classList.remove('hidden');
+            } else {
+                document.getElementById('register-section').classList.add('hidden');
+                document.getElementById('login-section').classList.remove('hidden');
+            }
+        }
+
+        // --- ระบบ Login & Logout ---
         function login() {
             const email = document.getElementById('login-id').value;
             const pass = document.getElementById('login-password').value;
             
-            if (!email || !pass) {
-                showModal('กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน', 'warning');
+            if (!email || !email.includes('@')) {
+                showModal('กรุณากรอกอีเมลให้ถูกต้อง', 'warning');
+                return;
+            }
+            if (!pass) {
+                showModal('กรุณากรอกรหัสผ่าน', 'warning');
                 return;
             }
 
-            const loginBtn = document.getElementById('btn-login');
-            const originalText = loginBtn.innerText;
+            // แสดงสถานะว่ากำลังโหลด
+            const loginBtn = document.querySelector('#login-section button.bg-\\[\\#FACC15\\]');
+            const originalBtnText = loginBtn.innerText;
             loginBtn.innerText = "กำลังตรวจสอบ...";
             loginBtn.disabled = true;
 
-            const params = new URLSearchParams({ action: 'login', email: email, password: pass });
+            const params = new URLSearchParams({
+                action: 'login',
+                email: email,
+                password: pass
+            });
 
             fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET' })
-                .then(res => res.json())
+                .then(response => response.json())
                 .then(data => {
-                    loginBtn.innerText = originalText;
+                    loginBtn.innerText = originalBtnText;
                     loginBtn.disabled = false;
                     
                     if (data.status === 'success') {
+                        // ล็อกอินผ่าน! ให้จำข้อมูลลงเครื่อง
                         localStorage.setItem('userEmail', email);
                         localStorage.setItem('userName', data.userName);
                         localStorage.setItem('userPhone', data.userPhone);
@@ -868,57 +1254,15 @@
                         showPage('dashboard-page');
                         fetchUserProgress(email); 
                     } else {
-                        // ดักจับรหัสผ่านผิดตรงนี้!
+                        // ล็อกอินไม่ผ่าน!
                         showModal(data.message || 'อีเมลหรือรหัสผ่านไม่ถูกต้อง', 'warning');
                     }
                 })
-                .catch(err => {
-                    loginBtn.innerText = originalText;
+                .catch(error => {
+                    loginBtn.innerText = originalBtnText;
                     loginBtn.disabled = false;
-                    showModal('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', 'warning');
-                });
-        }
-
-        // ฟังก์ชันสมัครสมาชิก
-        function register() {
-            const name = document.getElementById('reg-name').value;
-            const phone = document.getElementById('reg-phone').value;
-            const email = document.getElementById('reg-email').value;
-            const pass = document.getElementById('reg-pass').value;
-            const confirm = document.getElementById('reg-confirm').value;
-
-            if (!name || !phone || !email || !pass) {
-                showModal('กรุณากรอกข้อมูลให้ครบทุกช่อง', 'warning'); return;
-            }
-            if (pass !== confirm) {
-                showModal('รหัสผ่านไม่ตรงกัน', 'warning'); return;
-            }
-
-            const regBtn = document.getElementById('btn-register');
-            const originalText = regBtn.innerText;
-            regBtn.innerText = "กำลังสร้างบัญชี...";
-            regBtn.disabled = true;
-
-            const params = new URLSearchParams({
-                actionType: 'ลงทะเบียนผู้ใช้ใหม่', name: name, phone: phone, email: email, password: pass
-            });
-
-            fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET' })
-                .then(res => res.json())
-                .then(data => {
-                    regBtn.innerText = originalText;
-                    regBtn.disabled = false;
-                    
-                    if(data.status === 'success') {
-                         localStorage.setItem('userName', name);
-                         localStorage.setItem('userPhone', phone);
-                         localStorage.setItem('userEmail', email);
-                         
-                         showModal('ลงทะเบียนสำเร็จ! เข้าสู่หน้าหลัก', 'success');
-                         setTimeout(() => { closeModal(); showPage('dashboard-page'); }, 1500);
-                    } else {
-                        showModal(data.message, 'warning');
-                    }
+                    console.error("Error logging in:", error);
+                    showModal('เกิดข้อผิดพลาดในการเชื่อมต่อระบบ', 'warning');
                 });
         }
 
@@ -927,153 +1271,373 @@
             location.reload();
         }
 
-        function fetchUserProgress(email) {
-            const params = new URLSearchParams({ action: 'getUserProgress', email: email });
+        function forgotPassword() {
+            showModal('ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว', 'info');
+        }
+
+        // --- ระบบ Register ---
+        function register() {
+            const name = document.getElementById('reg-name').value;
+            const phone = document.getElementById('reg-phone').value;
+            const email = document.getElementById('reg-email').value;
+            const pass = document.getElementById('reg-pass').value;
+            const confirm = document.getElementById('reg-confirm').value;
+
+            if (!/^[a-zA-Z\s]+$/.test(name) || name.trim() === "") {
+                showModal('กรุณากรอกชื่อ-นามสกุล เป็นภาษาอังกฤษเท่านั้น', 'warning');
+                return;
+            }
+            if (!phone) {
+                showModal('กรุณากรอกเบอร์โทรศัพท์', 'warning');
+                return;
+            }
+            if (!email || !email.includes('@')) {
+                showModal('กรุณากรอกอีเมลให้ถูกต้อง', 'warning');
+                return;
+            }
+            if (pass.length < 4 || pass.length > 8) {
+                showModal('รหัสผ่านต้องมีความยาว 4-8 ตัวอักษร', 'warning');
+                return;
+            }
+            if (pass !== confirm) {
+                showModal('รหัสผ่านและการยืนยันรหัสผ่านไม่ตรงกัน', 'warning');
+                return;
+            }
+
+            // แสดงสถานะว่ากำลังโหลด
+            const regBtn = document.querySelector('#register-section button.bg-black');
+            const originalRegText = regBtn.innerText;
+            regBtn.innerText = "กำลังสร้างบัญชี...";
+            regBtn.disabled = true;
+
+            const params = new URLSearchParams({
+                actionType: 'ลงทะเบียนผู้ใช้ใหม่',
+                name: name,
+                phone: phone,
+                email: email,
+                password: pass
+            });
+
             fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET' })
-                .then(res => res.json())
+                .then(response => response.json())
                 .then(data => {
-                    if (data.status === "success" && data.completedTasks) {
-                        data.completedTasks.forEach(taskName => {
-                            for (let i = 1; i <= 8; i++) {
-                                const box = document.getElementById('box-step' + i);
-                                if (box && box.querySelector('button span:first-child').innerText.trim() === taskName) {
-                                    const cb = document.getElementById('cb-step' + i);
-                                    if (cb && !cb.checked) { cb.checked = true; toggleCheck(cb, 'step' + i, true); }
-                                }
-                            }
-                            const planCb = document.getElementById('cb-' + taskName);
-                            if (planCb && !planCb.checked) { planCb.checked = true; toggleComplexTask(planCb, taskName, true); }
-                        });
+                    regBtn.innerText = originalRegText;
+                    regBtn.disabled = false;
+                    
+                    if(data.status === 'success') {
+                         localStorage.setItem('userName', name);
+                         localStorage.setItem('userPhone', phone);
+                         localStorage.setItem('userEmail', email);
+                         
+                         showModal('ลงทะเบียนสำเร็จ! ระบบกำลังพาท่านเข้าสู่หน้าหลัก', 'success');
+                         setTimeout(() => {
+                             closeModal();
+                             showPage('dashboard-page');
+                         }, 1500);
+                    } else {
+                        showModal(data.message || 'เกิดข้อผิดพลาดในการลงทะเบียน', 'warning');
                     }
+                })
+                .catch(err => {
+                    regBtn.innerText = originalRegText;
+                    regBtn.disabled = false;
+                    console.error(err);
+                    showModal('เกิดข้อผิดพลาดในการเชื่อมต่อระบบ', 'warning');
                 });
         }
 
-        function sendDataToSheet(actionType, details = "") {
-            const params = new URLSearchParams({
-                actionType: actionType,
-                email: localStorage.getItem('userEmail') || '',
-                name: localStorage.getItem('userName') || '',
-                phone: localStorage.getItem('userPhone') || '',
-                faCode: localStorage.getItem('userFA') || '',
-                details: details
-            });
-            fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
-        }
-
-        function openDynamicLink(linkKey, fallbackMsg) {
-            const url = window.appLinks[linkKey];
-            if (url) {
-                sendDataToSheet('เปิดลิงก์', fallbackMsg || linkKey);
-                window.open(url, '_blank'); 
+        // --- ระบบเปิด/ปิด Accordion ---
+        function toggleDay(dayId) {
+            const content = document.getElementById('content-' + dayId);
+            const icon = document.getElementById('icon-' + dayId);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = '-';
             } else {
-                showModal('แอดมินกำลังเตรียมลิงก์สำหรับส่วนนี้ครับ', 'info');
+                content.classList.add('hidden');
+                icon.textContent = '+';
             }
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
-            document.getElementById(pageId).classList.add('active-page');
-            window.scrollTo(0, 0);
+        function toggleAccordion(stepId) {
+            const content = document.getElementById(stepId);
+            const icon = document.getElementById('icon-' + stepId);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = '-';
+            } else {
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            }
         }
 
-        function toggleAuth(type) {
-            document.getElementById('login-section').classList.toggle('hidden', type === 'register');
-            document.getElementById('register-section').classList.toggle('hidden', type === 'login');
-        }
-
-        function forgotPassword() { showModal('ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว', 'info'); }
-        function toggleDay(id) { document.getElementById('content-' + id).classList.toggle('hidden'); document.getElementById('icon-' + id).textContent = document.getElementById('content-' + id).classList.contains('hidden') ? '+' : '-'; }
-        function toggleAccordion(id) { document.getElementById(id).classList.toggle('hidden'); document.getElementById('icon-' + id).textContent = document.getElementById(id).classList.contains('hidden') ? '+' : '-'; }
-
+        // --- ระบบเลือก FA ---
         function autoFillFA() {
             const selector = document.getElementById('fa-selector');
+            const nameInput = document.getElementById('auto-fa-name');
+            const codeInput = document.getElementById('auto-fa-code');
+            
             if (selector.value) {
                 const values = selector.value.split(',');
-                document.getElementById('auto-fa-name').value = 'คุณ' + values[0];
-                document.getElementById('auto-fa-code').value = values[1];
+                if(nameInput) nameInput.value = 'คุณ' + values[0];
+                if(codeInput) codeInput.value = values[1];
+                
                 localStorage.setItem('userFA', values[1]);
-                sendDataToSheet('ระบุผู้แนะนำ (FA)', 'เลือก FA: ' + values[0]);
+                sendDataToSheet('ระบุผู้แนะนำ (FA)', 'เลือก FA: ' + values[0] + ' (' + values[1] + ')');
+            } else {
+                if(nameInput) nameInput.value = '';
+                if(codeInput) codeInput.value = '';
+                localStorage.removeItem('userFA');
             }
         }
 
         function goToIRecruit() {
-            const sel = document.getElementById('fa-selector');
-            if (!sel.value) return showModal('กรุณาเลือกผู้แนะนำ (FA) ก่อนครับ', 'warning');
-            const url = sel.options[sel.selectedIndex].getAttribute('data-url');
-            if (url) { sendDataToSheet('เปิดลิงก์', 'ไป iRecruit'); window.open(url, '_blank'); }
-            else showModal('FA ท่านนี้ยังไม่มีลิงก์ iRecruit', 'info');
+            const selector = document.getElementById('fa-selector');
+            if (!selector || selector.selectedIndex === 0 || !selector.value) {
+                showModal('กรุณาเลือก "ชื่อผู้แนะนำ (FA)" ก่อนกดไปที่หน้าเว็บ iRecruit ครับ', 'warning');
+                return;
+            }
+            const selectedOption = selector.options[selector.selectedIndex];
+            const url = selectedOption.getAttribute('data-url');
+            if (url && url.trim() !== "") {
+                sendDataToSheet('เปิดลิงก์', 'ไปหน้า iRecruit ของ FA');
+                window.open(url, '_blank');
+            } else {
+                showModal('FA ท่านนี้ยังไม่ได้ระบุลิงก์ iRecruit ในระบบครับ', 'info');
+            }
         }
 
-        function toggleCheck(cb, stepId, skipSave = false) {
+        // --- ระบบเช็กถูก (เมนู 1) ---
+        function toggleCheck(checkbox, stepId, skipSave = false) {
             const box = document.getElementById('box-' + stepId);
-            const status = cb.nextElementSibling;
-            if(cb.checked) {
-                box.classList.add('step-completed'); status.classList.add('step-completed-text');
-                if(!skipSave) sendDataToSheet(box.querySelector('button span:first-child').innerText, 'ทำสำเร็จแล้ว');
+            const titleSpan = box.querySelector('button span:first-child');
+            const statusSpan = checkbox.nextElementSibling;
+
+            if(checkbox.checked) {
+                box.classList.add('step-completed');
+                titleSpan.classList.add('step-completed-text');
+                statusSpan.classList.add('step-completed-text');
+                statusSpan.textContent = 'ทำสำเร็จแล้ว';
+                
+                // ถ้ายูเซอร์กดเอง (ไม่ได้ดึงจากประวัติ) ให้ส่งไปบันทึก
+                if (!skipSave) {
+                    sendDataToSheet(titleSpan.innerText, 'ทำสำเร็จแล้ว');
+                }
+                
+                setTimeout(() => {
+                    const content = document.getElementById(stepId);
+                    const icon = document.getElementById('icon-' + stepId);
+                    if(content) content.classList.add('hidden');
+                    if(icon) icon.textContent = '+';
+                }, 500);
             } else {
-                box.classList.remove('step-completed'); status.classList.remove('step-completed-text');
+                box.classList.remove('step-completed');
+                titleSpan.classList.remove('step-completed-text');
+                statusSpan.classList.remove('step-completed-text');
+                statusSpan.textContent = 'ทำสำเร็จแล้ว';
             }
             checkAllStepsCompleted();
         }
 
+        // --- ยื่นจองสอบ ---
         function submitExam() {
-            const n = document.getElementById('exam-name').value, id = document.getElementById('exam-idcard').value, r = document.getElementById('exam-round').value;
-            if(!n || !id || !r) return showModal('กรุณากรอกข้อมูลให้ครบถ้วน', 'warning');
-            sendDataToSheet('ลงทะเบียนจองวันสอบ', `บัตร: ${id}, รอบ: ${r}`);
-            showModal('ส่งข้อมูลจองสอบเรียบร้อย', 'success');
+            const name = document.getElementById('exam-name').value;
+            const idCard = document.getElementById('exam-idcard').value;
+            const phone = document.getElementById('exam-phone').value;
+            const round = document.getElementById('exam-round').value;
+
+            if(!name || !idCard || !phone || !round) {
+                showModal('กรุณากรอกข้อมูลให้ครบถ้วน', 'warning');
+                return;
+            }
+            localStorage.setItem('userPhone', phone);
+            sendDataToSheet('ลงทะเบียนจองวันสอบ', `บัตรปชช: ${idCard}, รอบสอบ: ${round}`);
+            showModal('ข้อมูลจองสอบถูกส่งไปยังระบบและแจ้งเตือนแอดมินเรียบร้อยแล้ว', 'success');
         }
 
-        function requestIRecruitLink() { sendDataToSheet('ขอลิงก์ iRecruit', 'รอดำเนินการ'); showModal('ส่งคำขอลิงก์ให้ทีมงานเรียบร้อยแล้ว', 'success'); }
-        function requestProspectCode() { sendDataToSheet('ขอรหัสผู้มุ่งหวัง', 'รอ Admin สร้าง'); showModal('ส่งคำขอรหัสผู้มุ่งหวังเรียบร้อย', 'success'); }
+        function requestIRecruitLink() {
+            sendDataToSheet('ขอลิงก์ iRecruit', 'รอดำเนินการจัดส่งลิงก์จากแอดมิน');
+            showModal('ระบบได้ส่งเรื่องให้ทีมงานเรียบร้อยแล้ว!<br><br>กรุณากดแอด <b>LINE OA: @MCDJ_Team</b><br>และทักแชทแจ้งชื่อของคุณ เพื่อรับลิงก์กรอกใบสมัครจากแอดมินครับ', 'success');
+        }
 
+        function requestProspectCode() {
+            sendDataToSheet('ขอรหัสผู้มุ่งหวัง', 'รอ Admin สร้างรหัสให้');
+            showModal('ส่งคำขอเรียบร้อย!<br>ระบบจะส่ง รหัสผู้มุ่งหวัง ให้ท่านทางช่องทางติดต่อ', 'success');
+        }
+
+        // --- ฟังก์ชันปลดล็อกข้อ 9 ---
         function checkAllStepsCompleted() {
-            let all = true;
-            for (let i = 1; i <= 8; i++) if (!document.getElementById('cb-step' + i)?.checked) all = false;
-            
-            const b = document.getElementById('box-step9'), i = document.getElementById('icon-step9'), t = document.getElementById('title-step9');
-            if (all) {
-                b.className = "mb-4 border-[#22C55E] bg-[#F0FDF4] border-solid rounded-2xl p-8 text-center transition-all";
-                i.textContent = '✅'; i.className = "text-[#22C55E] text-3xl mb-3";
-                t.className = "text-lg font-medium text-[#15803D] mb-2";
+            let allChecked = true;
+            for (let i = 1; i <= 8; i++) {
+                const cb = document.getElementById('cb-step' + i);
+                if (!cb || !cb.checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+
+            const step9Box = document.getElementById('box-step9');
+            const step9Icon = document.getElementById('icon-step9');
+            const step9Title = document.getElementById('title-step9');
+            const step9Desc = document.getElementById('desc-step9');
+
+            if (allChecked) {
+                step9Box.classList.remove('border-gray-300', 'bg-gray-50', 'opacity-70', 'border-dashed');
+                step9Box.classList.add('border-[#22C55E]', 'bg-[#F0FDF4]', 'border-solid');
+                step9Icon.textContent = '✅';
+                step9Icon.classList.replace('text-gray-400', 'text-[#22C55E]');
+                step9Title.classList.replace('text-gray-400', 'text-[#15803D]');
+                step9Desc.textContent = 'ท่านได้ทำครบทุกขั้นตอนแล้ว ขณะนี้ทีมงานกำลังดำเนินการยื่นเรื่องให้ท่าน';
+                step9Desc.classList.replace('text-gray-400', 'text-green-700');
+                updateMenuStatus('menu1', true);
             } else {
-                b.className = "mb-4 border border-dashed border-gray-300 bg-gray-50 opacity-70 rounded-2xl p-8 text-center transition-all";
-                i.textContent = '⏳'; i.className = "text-gray-400 text-3xl mb-3";
-                t.className = "text-lg font-medium text-gray-400 mb-2";
+                step9Box.classList.add('border-gray-300', 'bg-gray-50', 'opacity-70', 'border-dashed');
+                step9Box.classList.remove('border-[#22C55E]', 'bg-[#F0FDF4]', 'border-solid');
+                step9Icon.textContent = '⏳';
+                step9Icon.classList.replace('text-[#22C55E]', 'text-gray-400');
+                step9Title.classList.replace('text-[#15803D]', 'text-gray-400');
+                step9Desc.textContent = 'ดำเนินการขั้นตอนที่ 1-8 ให้ครบถ้วนเพื่อปลดล็อก';
+                step9Desc.classList.replace('text-green-700', 'text-gray-400');
+                updateMenuStatus('menu1', false);
             }
         }
 
-        function showModal(msg, type = 'warning') {
-            document.getElementById('custom-modal').classList.remove('hidden');
-            document.getElementById('modal-message').innerHTML = msg;
-            document.getElementById('modal-icon').innerText = type === 'success' ? '✅' : (type === 'info' ? 'ℹ️' : '⚠️');
+        // --- Modal ---
+        function showModal(message, type = 'warning') {
+            const modal = document.getElementById('custom-modal');
+            const msgEl = document.getElementById('modal-message');
+            const iconEl = document.getElementById('modal-icon');
+            
+            modal.classList.remove('hidden');
+            msgEl.innerHTML = message;
+            
+            if (type === 'success') iconEl.innerText = '✅';
+            else if (type === 'info') iconEl.innerText = 'ℹ️';
+            else iconEl.innerText = '⚠️';
         }
-        function closeModal() { document.getElementById('custom-modal').classList.add('hidden'); }
 
-        function toggleComplexTask(cb, name, skipSave = false) {
-            const c = cb.closest('.complex-task'), t = c.querySelector('.task-content');
-            if (cb.checked) {
-                c.className = "complex-task transition-all duration-300 bg-[#F0FDF4] rounded-xl p-3 -mx-3 border-transparent";
-                t.classList.add('opacity-50', 'line-through'); 
-                if (!skipSave) sendDataToSheet(name, 'ทำสำเร็จแล้ว');
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // --- ระบบเช็กความคืบหน้า (เมนู 2) ---
+        function toggleComplexTask(checkbox, taskName, skipSave = false) {
+            const container = checkbox.closest('.complex-task');
+            const taskContent = container.querySelector('.task-content');
+            
+            if (checkbox.checked) {
+                container.classList.add('bg-[#F0FDF4]', 'rounded-xl', 'p-3', '-mx-3', 'border-transparent');
+                container.classList.remove('border-b', 'border-gray-50', 'pb-4');
+                taskContent.classList.add('opacity-50', 'line-through'); 
+                
+                if (!skipSave) {
+                    sendDataToSheet(taskName, 'ทำสำเร็จแล้ว');
+                }
             } else {
-                c.className = "complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50";
-                t.classList.remove('opacity-50', 'line-through');
+                container.classList.remove('bg-[#F0FDF4]', 'rounded-xl', 'p-3', '-mx-3', 'border-transparent');
+                container.classList.add('border-b', 'border-gray-50', 'pb-4');
+                taskContent.classList.remove('opacity-50', 'line-through');
             }
             checkPlan15Days();
+            checkDayCompletion(checkbox);
+        }
+
+        function checkDayCompletion(checkbox) {
+            const dayContent = checkbox.closest('[id^="content-day"]');
+            if (!dayContent) return;
+
+            const dayId = dayContent.id.replace('content-', '');
+            const tasks = dayContent.querySelectorAll('.plan-task');
+            let allChecked = true;
+            tasks.forEach(t => { if (!t.checked) allChecked = false; });
+
+            const badge = document.getElementById('badge-' + dayId);
+            const title = document.getElementById('title-' + dayId);
+
+            if (allChecked) {
+                if (badge) {
+                    badge.classList.replace('bg-white', 'bg-[#22C55E]');
+                    badge.classList.replace('border-gray-200', 'border-[#22C55E]');
+                    badge.classList.replace('text-black', 'text-white');
+                }
+                if (title) {
+                    title.classList.replace('text-black', 'text-[#15803D]');
+                    title.classList.replace('font-normal', 'font-medium');
+                }
+            } else {
+                if (badge) {
+                    badge.classList.replace('bg-[#22C55E]', 'bg-white');
+                    badge.classList.replace('border-[#22C55E]', 'border-gray-200');
+                    badge.classList.replace('text-white', 'text-black');
+                }
+                if (title) {
+                    title.classList.replace('text-[#15803D]', 'text-black');
+                    title.classList.replace('font-medium', 'font-normal');
+                }
+            }
         }
 
         function checkPlan15Days() {
-            let all = true;
-            document.querySelectorAll('.plan-task').forEach(t => { if (!t.checked) all = false; });
-            const b = document.getElementById('completion-banner'), i = document.getElementById('completion-icon'), t = document.getElementById('completion-title');
-            if (b) {
-                if (all) {
-                    b.className = "mt-12 mb-8 border-[#22C55E] bg-[#F0FDF4] border-solid shadow-lg rounded-2xl p-8 text-center scale-105 transition-all";
-                    i.innerHTML = '🏆'; t.className = "text-xl font-medium text-[#15803D] mb-3";
+            const allTasks = document.querySelectorAll('.plan-task');
+            let allTasksChecked = true;
+            allTasks.forEach(task => { if (!task.checked) allTasksChecked = false; });
+            updateMenuStatus('menu2', allTasksChecked);
+
+            const banner = document.getElementById('completion-banner');
+            const icon = document.getElementById('completion-icon');
+            const title = document.getElementById('completion-title');
+            const desc = document.getElementById('completion-desc');
+
+            if (banner) {
+                if (allTasksChecked) {
+                    banner.classList.remove('border-gray-300', 'bg-gray-50', 'opacity-70', 'border-dashed');
+                    banner.classList.add('border-[#22C55E]', 'bg-[#F0FDF4]', 'border-solid', 'shadow-[0_10px_30px_rgba(34,197,94,0.15)]', 'scale-105');
+                    icon.innerHTML = '🏆🏁';
+                    icon.classList.replace('text-gray-400', 'scale-125');
+                    title.innerHTML = '🎉 จบหลักสูตร 15 วันอย่างเป็นทางการ!';
+                    title.classList.replace('text-gray-400', 'text-[#15803D]');
+                    desc.innerHTML = '<span class="font-medium text-[#15803D] block mb-2">"ความสำเร็จไม่ได้เกิดจากความบังเอิญ แต่เกิดจากการลงมือทำอย่างตั้งใจ"</span>ขอแสดงความยินดีที่คุณผ่านบททดสอบแรก ตอนนี้คุณพร้อมแล้วที่จะออกไปสร้างตำนานและส่งต่อคุณค่าให้ผู้คน ออกไปลุยกันเลย!';
+                    desc.classList.replace('text-gray-400', 'text-green-700');
                 } else {
-                    b.className = "mt-12 mb-8 border border-dashed border-gray-300 bg-gray-50 opacity-70 rounded-2xl p-8 text-center transition-all";
-                    i.innerHTML = '🏁'; t.className = "text-xl font-medium text-gray-400 mb-3";
+                    banner.classList.add('border-gray-300', 'bg-gray-50', 'opacity-70', 'border-dashed');
+                    banner.classList.remove('border-[#22C55E]', 'bg-[#F0FDF4]', 'border-solid', 'shadow-[0_10px_30px_rgba(34,197,94,0.15)]', 'scale-105');
+                    icon.innerHTML = '🏁';
+                    icon.classList.add('text-gray-400');
+                    icon.classList.remove('scale-125');
+                    title.innerHTML = 'ภารกิจ 15 วันแรก';
+                    title.classList.replace('text-[#15803D]', 'text-gray-400');
+                    desc.innerHTML = 'กรุณาทำภารกิจแผนงาน 15 วันด้านบนให้ครบทุกข้อเพื่อปลดล็อกความสำเร็จ';
+                    desc.classList.replace('text-green-700', 'text-gray-400');
                 }
+            }
+        }
+
+        function updateMenuStatus(menuId, isCompleted) {
+            const btn = document.getElementById(`btn-${menuId}`);
+            const badge = document.getElementById(`badge-${menuId}`);
+            const icon = document.getElementById(`icon-${menuId}`);
+            const title = document.getElementById(`title-${menuId}`);
+            const desc = document.getElementById(`desc-${menuId}`);
+
+            if (!btn) return;
+
+            if (isCompleted) {
+                btn.className = "flex flex-col text-left bg-[#F0FDF4] p-6 rounded-2xl border border-[#22C55E] transition-all duration-300 shadow-sm relative overflow-hidden group";
+                if(badge) badge.classList.remove('hidden');
+                
+                if(icon && !icon.hasAttribute('data-original')) icon.setAttribute('data-original', icon.textContent);
+                if(icon) icon.textContent = '✅';
+                
+                if(title) title.className = "font-medium text-[#15803D] text-lg";
+                if(desc) desc.className = "text-sm text-green-700 font-light ml-12";
+            } else {
+                btn.className = "flex flex-col text-left bg-white p-6 rounded-2xl border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300 shadow-sm relative overflow-hidden group";
+                if(badge) badge.classList.add('hidden');
+                
+                if(icon && icon.hasAttribute('data-original')) icon.textContent = icon.getAttribute('data-original');
+                
+                if(title) title.className = "font-normal text-black text-lg";
+                if(desc) desc.className = "text-sm text-gray-500 font-light ml-12";
             }
         }
     </script>

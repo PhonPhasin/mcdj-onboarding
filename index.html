@@ -455,7 +455,21 @@
                             </label>
                         </div>
 
-                        <!-- 2. iMO Smart -->
+                        <!-- 2. เว็บ AIA Agent (สลับขึ้นมา) -->
+                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
+                            <label class="flex items-start space-x-3 cursor-pointer group mb-3">
+                                <input type="checkbox" id="cb-เข้าระบบเว็บ AIA Agent" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เข้าระบบเว็บ AIA Agent')">
+                                <div class="flex-1 task-content transition-opacity duration-300">
+                                    <span class="text-sm text-black font-medium transition-colors">เข้าระบบเว็บ AIA Agent</span>
+                                </div>
+                            </label>
+                            <div class="ml-7 flex flex-wrap gap-2">
+                                <button onclick="openDynamicLink('day1_agent_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน AIA Agent')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการเข้าใช้งาน</button>
+                                <button onclick="openDynamicLink('day1_agent_link', 'พาท่านไปยัง: ลิงก์เข้าสู่การลงทะเบียน AIA Agent')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่การลงทะเบียน</button>
+                            </div>
+                        </div>
+
+                        <!-- 3. iMO Smart (สลับลงมา) -->
                         <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
                             <label class="flex items-start space-x-3 cursor-pointer group mb-3">
                                 <input type="checkbox" id="cb-เข้าใช้งานใน Line เพื่อเชื่อมต่อ iMo Smart" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เข้าใช้งานใน Line เพื่อเชื่อมต่อ iMo Smart')">
@@ -468,20 +482,6 @@
                                 <button onclick="openDynamicLink('day1_imo_manual', 'กำลังเปิด: คู่มือการลงทะเบียน iMo Smart')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการลงทะเบียน</button>
                                 <button onclick="openDynamicLink('day1_imo_link', 'พาท่านไปยัง: ลิงก์เข้าสู่การลงทะเบียน')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่การลงทะเบียน</button>
                                 <button onclick="openDynamicLink('day1_imo_use_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน iMo Smart')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการเข้าใช้งาน</button>
-                            </div>
-                        </div>
-
-                        <!-- 3. เว็บ AIA Agent -->
-                        <div class="complex-task transition-all duration-300 mb-4 pb-4 border-b border-gray-50">
-                            <label class="flex items-start space-x-3 cursor-pointer group mb-3">
-                                <input type="checkbox" id="cb-เข้าระบบเว็บ AIA Agent" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, 'เข้าระบบเว็บ AIA Agent')">
-                                <div class="flex-1 task-content transition-opacity duration-300">
-                                    <span class="text-sm text-black font-medium transition-colors">เข้าระบบเว็บ AIA Agent</span>
-                                </div>
-                            </label>
-                            <div class="ml-7 flex flex-wrap gap-2">
-                                <button onclick="openDynamicLink('day1_agent_manual', 'กำลังเปิด: คู่มือการเข้าใช้งาน AIA Agent')" class="text-[10px] border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600 hover:border-black hover:text-black transition">คู่มือการเข้าใช้งาน</button>
-                                <button onclick="openDynamicLink('day1_agent_link', 'พาท่านไปยัง: ลิงก์เข้าสู่การลงทะเบียน AIA Agent')" class="text-[10px] bg-black text-white px-3 py-1.5 rounded-lg hover:bg-gray-800 transition shadow-sm">ลิงก์เข้าสู่การลงทะเบียน</button>
                             </div>
                         </div>
 

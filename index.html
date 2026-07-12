@@ -38,7 +38,6 @@
     </style>
 </head>
 <body class="pb-12">
-
     <!-- Navbar สไตล์ Clean -->
     <div class="bg-white border-b border-gray-200 p-4 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-opacity-90">
         <div class="flex justify-between items-center max-w-4xl mx-auto">
@@ -62,7 +61,7 @@
         <!-- ส่วนเข้าสู่ระบบ -->
         <div id="login-section" class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center fade-in">
             <h2 class="text-3xl font-light tracking-tight text-black mb-3">เข้าสู่ระบบ</h2>
-            <p class="text-sm text-gray-500 font-light mb-8">กรุณากรอกอีเมลเพื่อติดตามความคืบหน้า</p>
+            <p class="text-sm text-gray-500 font-light mb-8">กรุณากรอกอีเมลและรหัสผ่านเพื่อเข้าใช้งาน</p>
             
             <input type="email" id="login-id" placeholder="อีเมลเท่านั้น (example@email.com)" class="w-full bg-[#F8F9FA] border border-gray-200 rounded-xl px-4 py-3.5 text-black font-light focus:outline-none focus:border-black focus:ring-1 focus:ring-black mb-4 transition">
             
@@ -727,12 +726,12 @@
                             </label>
                         </div>
 
-                        <!-- 5. MULTI-PAY CI -->
+                        <!-- 5. 5E8 MULTI-PAY CI -->
                         <div class="complex-task transition-all duration-300">
                             <label class="flex items-start space-x-3 cursor-pointer group">
-                                <input type="checkbox" id="cb-5. MULTI-PAY CI" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '5. MULTI-PAY CI')">
+                                <input type="checkbox" id="cb-5. 5E8 MULTI-PAY CI" class="mt-1 rounded-sm border-gray-300 text-black focus:ring-black plan-task" onchange="toggleComplexTask(this, '5. 5E8 MULTI-PAY CI')">
                                 <div class="flex-1 task-content transition-opacity duration-300">
-                                    <span class="text-sm text-black font-medium transition-colors">5. MULTI-PAY CI</span>
+                                    <span class="text-sm text-black font-medium transition-colors">5. 5E8 MULTI-PAY CI</span>
                                 </div>
                             </label>
                         </div>
@@ -1069,18 +1068,17 @@
     </div>
 
     <script>
-        // --- ใส่ URL ของคุณตรงนี้เรียบร้อยแล้ว ---
+        // --- URL ของ Google Apps Script (สำคัญมาก ห้ามลบ) ---
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMIVZLvmeaTUpPeutahBxpfor0_4QygX2qMJhLY4EPW3Xf5N3WCtPDFo82XDqpbyez/exec';
 
         window.appLinks = {};
 
         // --- โหลดข้อมูลตอนเปิดเว็บ ---
         window.onload = function() {
-            // เช็คว่ามีข้อมูลผู้ใช้ในระบบหรือยัง
             const userEmail = localStorage.getItem('userEmail');
             if(userEmail) {
                 showPage('dashboard-page');
-                fetchUserProgress(userEmail); // สั่งดึงประวัติการติ๊กถูก
+                fetchUserProgress(userEmail); 
             }
 
             fetch(SCRIPT_URL + '?action=getData', { method: 'GET', redirect: 'follow' })
@@ -1122,7 +1120,7 @@
                 .catch(err => console.error("Error loading data:", err));
         };
 
-        // --- ฟังก์ชันดึงประวัติการติ๊กถูกจาก Google Sheets ---
+        // --- ฟังก์ชันดึงประวัติการติ๊กถูก ---
         function fetchUserProgress(email) {
             const params = new URLSearchParams({
                 action: 'getUserProgress',
@@ -1133,9 +1131,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success" && data.completedTasks) {
-                        // วนลูปรายชื่อ Task ที่ทำไปแล้ว และติ๊กถูกให้
                         data.completedTasks.forEach(taskName => {
-                            // เช็คสำหรับเมนู 1 (step1 - step8)
                             for (let i = 1; i <= 8; i++) {
                                 const box = document.getElementById('box-step' + i);
                                 if (box) {
@@ -1144,17 +1140,15 @@
                                         const checkbox = document.getElementById('cb-step' + i);
                                         if (checkbox && !checkbox.checked) {
                                             checkbox.checked = true;
-                                            toggleCheck(checkbox, 'step' + i, true); // true = ไม่ต้องส่งค่ากลับไปบันทึกซ้ำ
+                                            toggleCheck(checkbox, 'step' + i, true);
                                         }
                                     }
                                 }
                             }
-
-                            // เช็คสำหรับเมนู 2 (แผนงาน 15 วัน) - อิงจาก id ที่ตั้งไว้
                             const planCheckbox = document.getElementById('cb-' + taskName);
                             if (planCheckbox && !planCheckbox.checked) {
                                 planCheckbox.checked = true;
-                                toggleComplexTask(planCheckbox, taskName, true); // true = ไม่ต้องส่งค่ากลับไปบันทึกซ้ำ
+                                toggleComplexTask(planCheckbox, taskName, true);
                             }
                         });
                     }
@@ -1162,7 +1156,7 @@
                 .catch(error => console.error("Error fetching progress:", error));
         }
 
-        // --- ฟังก์ชันหลักสำหรับส่งข้อมูลไป Google Sheets ---
+        // --- ฟังก์ชันส่งข้อมูลไป Google Sheets ---
         function sendDataToSheet(actionType, details = "") {
             const userEmail = localStorage.getItem('userEmail') || '';
             const userName = localStorage.getItem('userName') || '';
@@ -1183,11 +1177,10 @@
                 .catch(error => console.error('Error logging:', error));
         }
 
-        // --- ระบบเปิดลิงก์แบบดึงจาก Google Sheets (Dynamic Links) ---
+        // --- ระบบเปิดลิงก์ ---
         function openDynamicLink(linkKey, fallbackMsg) {
             const url = window.appLinks[linkKey];
             if (url && url.trim() !== "") {
-                // บันทึกการกดปุ่มเข้าไปใน Tracking ด้วย
                 sendDataToSheet('เปิดลิงก์', fallbackMsg || linkKey);
                 window.open(url, '_blank'); 
             } else {
@@ -1195,7 +1188,7 @@
             }
         }
 
-        // --- ระบบเปลี่ยนหน้าต่าง (Routing) ---
+        // --- ระบบเปลี่ยนหน้าต่าง ---
         function showPage(pageId) {
             document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
@@ -1212,7 +1205,7 @@
             }
         }
 
-        // --- ระบบ Login & Logout ---
+        // --- ระบบ Login & Logout (ของจริง) ---
         function login() {
             const email = document.getElementById('login-id').value;
             const pass = document.getElementById('login-password').value;
@@ -1226,7 +1219,6 @@
                 return;
             }
 
-            // แสดงสถานะว่ากำลังโหลด
             const loginBtn = document.querySelector('#login-section button.bg-\\[\\#FACC15\\]');
             const originalBtnText = loginBtn.innerText;
             loginBtn.innerText = "กำลังตรวจสอบ...";
@@ -1245,7 +1237,6 @@
                     loginBtn.disabled = false;
                     
                     if (data.status === 'success') {
-                        // ล็อกอินผ่าน! ให้จำข้อมูลลงเครื่อง
                         localStorage.setItem('userEmail', email);
                         localStorage.setItem('userName', data.userName);
                         localStorage.setItem('userPhone', data.userPhone);
@@ -1254,7 +1245,6 @@
                         showPage('dashboard-page');
                         fetchUserProgress(email); 
                     } else {
-                        // ล็อกอินไม่ผ่าน!
                         showModal(data.message || 'อีเมลหรือรหัสผ่านไม่ถูกต้อง', 'warning');
                     }
                 })
@@ -1272,7 +1262,7 @@
         }
 
         function forgotPassword() {
-            showModal('ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว', 'info');
+            showModal('กรุณาติดต่อแอดมินหรือหัวหน้าทีมเพื่อขอรีเซ็ตรหัสผ่านครับ', 'info');
         }
 
         // --- ระบบ Register ---
@@ -1304,7 +1294,6 @@
                 return;
             }
 
-            // แสดงสถานะว่ากำลังโหลด
             const regBtn = document.querySelector('#register-section button.bg-black');
             const originalRegText = regBtn.innerText;
             regBtn.innerText = "กำลังสร้างบัญชี...";
@@ -1325,17 +1314,13 @@
                     regBtn.disabled = false;
                     
                     if(data.status === 'success') {
-                         localStorage.setItem('userName', name);
-                         localStorage.setItem('userPhone', phone);
-                         localStorage.setItem('userEmail', email);
-                         
-                         showModal('ลงทะเบียนสำเร็จ! ระบบกำลังพาท่านเข้าสู่หน้าหลัก', 'success');
+                         showModal('ลงทะเบียนสำเร็จ! กรุณาเข้าสู่ระบบ', 'success');
                          setTimeout(() => {
                              closeModal();
-                             showPage('dashboard-page');
+                             toggleAuth('login');
                          }, 1500);
                     } else {
-                        showModal(data.message || 'เกิดข้อผิดพลาดในการลงทะเบียน', 'warning');
+                        showModal(data.message || 'เกิดข้อผิดพลาดในการลงทะเบียน (อีเมลนี้อาจมีในระบบแล้ว)', 'warning');
                     }
                 })
                 .catch(err => {
@@ -1419,7 +1404,6 @@
                 statusSpan.classList.add('step-completed-text');
                 statusSpan.textContent = 'ทำสำเร็จแล้ว';
                 
-                // ถ้ายูเซอร์กดเอง (ไม่ได้ดึงจากประวัติ) ให้ส่งไปบันทึก
                 if (!skipSave) {
                     sendDataToSheet(titleSpan.innerText, 'ทำสำเร็จแล้ว');
                 }
